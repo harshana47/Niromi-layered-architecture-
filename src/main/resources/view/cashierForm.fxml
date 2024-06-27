@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.Media?>
+<?import javafx.scene.media.MediaPlayer?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="360.0" prefWidth="639.0" style="-fx-background-color: #0000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.CashierFormController">
+   <children>
+      <MediaView fx:id="mediaView" fitHeight="0.0" fitWidth="0.0" layoutX="-1.0">
+         <mediaPlayer>
+            <MediaPlayer>
+               <media>
+                  <Media>
+                     <source>
+                        <URL value="file:/C:/Users/Harshana/Downloads/LARS-SKINCARE-VIDEO.mp4" />
+                     </source>
+                  </Media>
+               </media>
+            </MediaPlayer>
+         </mediaPlayer>
+      </MediaView>
+      <Label layoutX="240.0" layoutY="28.0" text="Niromi Fashion" textFill="#4d4d4d">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUserName" blendMode="MULTIPLY" layoutX="181.0" layoutY="106.0" onAction="#txtUserNameOnAction" prefHeight="41.0" prefWidth="277.0" promptText="User Id:" style="-fx-border-color: #6b6363;">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></TextField>
+      <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="222.0" layoutY="284.0" onAction="#btnLoginOnAction" prefHeight="32.0" prefWidth="191.0" style="-fx-background-color: #5b53f5;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icon/login.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <effect>
+            <Glow />
+         </effect>
+      </JFXButton>
+      <Line endX="124.0" layoutX="271.0" layoutY="61.0" startX="-31.0" stroke="#1e1e1e" />
+      <Label layoutX="180.0" layoutY="84.0" text="User Id:" textFill="#3c3c3c">
+         <effect>
+            <Blend />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="50.0" />
+         </opaqueInsets>
+         <font>
+            <Font name="Sylfaen" size="12.0" />
+         </font></Label>
+      <Label layoutX="180.0" layoutY="165.0" mouseTransparent="true" text="password:" textFill="#3c3c3c">
+         <effect>
+            <Blend />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="50.0" />
+         </opaqueInsets>
+         <font>
+            <Font name="Sitka Text" size="12.0" />
+         </font></Label>
+      <PasswordField fx:id="txtPassword" blendMode="MULTIPLY" layoutX="181.0" layoutY="188.0" onAction="#txtPasswordOnAction" prefHeight="41.0" prefWidth="277.0" promptText="Password" style="-fx-border-color: #6b6363;">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </PasswordField>
+   </children>
+</AnchorPane>

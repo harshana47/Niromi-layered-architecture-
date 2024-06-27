@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ShopBillReport" pageWidth="298" pageHeight="420" columnWidth="258" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77e4f61f-4d05-4b48-9a5f-fc5410d6f1c1">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (4)"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT o.orderId, o.orderDate, o.ExpireDiscountStatus, p.name AS productName, p.price AS productPrice, 
+       pm.promoName AS promotionName, pm.discountPercentage AS discountPercentage,
+       SUM(opd.quantity * opd.itemPrice) AS totalAmount,
+       o.totalAmount AS orderTotalAmount,
+       opd.quantity AS quantity
+FROM orders o
+JOIN orderProductDetailDTOS opd ON o.orderId = opd.orderId
+JOIN productDTO p ON opd.productId = p.productId
+LEFT JOIN promotionDTO pm ON p.promoId = pm.promoId
+WHERE o.orderId = (SELECT MAX(orderId) FROM orders)
+GROUP BY o.orderId, o.orderDate, p.name, p.price, pm.promoName, pm.discountPercentage, o.totalAmount, opd.quantity;]]>
+	</queryString>
+	<field name="orderId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="orderId"/>
+		<property name="com.jaspersoft.studio.field.label" value="orderId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="orderDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="orderDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="orderDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="ExpireDiscountStatus" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ExpireDiscountStatus"/>
+		<property name="com.jaspersoft.studio.field.label" value="ExpireDiscountStatus"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="productName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="productName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productDTO"/>
+	</field>
+	<field name="productPrice" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="price"/>
+		<property name="com.jaspersoft.studio.field.label" value="productPrice"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productDTO"/>
+	</field>
+	<field name="promotionName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="promoName"/>
+		<property name="com.jaspersoft.studio.field.label" value="promotionName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="promotionDTO"/>
+	</field>
+	<field name="discountPercentage" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="discountPercentage"/>
+		<property name="com.jaspersoft.studio.field.label" value="discountPercentage"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="promotionDTO"/>
+	</field>
+	<field name="totalAmount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="totalAmount"/>
+		<property name="com.jaspersoft.studio.field.label" value="totalAmount"/>
+	</field>
+	<field name="orderTotalAmount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="totalAmount"/>
+		<property name="com.jaspersoft.studio.field.label" value="orderTotalAmount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orders"/>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="quantity"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantity"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="orderproductdetails"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="0" width="210" height="25" uuid="2787a247-3fd4-4044-9c8b-4d0e6af56aa6">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Niromi Cosmetics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="25" width="205" height="25" uuid="0140865a-646f-40e6-ae32-a2f0b0ea6bd2"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[190 A8, Bandaragama
+ Phone: 0382 256 375]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="35">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" uuid="6d925a7b-2740-4b83-b4c3-14e628b5c3cb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="0" width="68" height="30" uuid="063dd5f1-b20e-4b87-b5d0-64aa1480e4a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="12" width="260" height="20" uuid="3144b3b1-f5cc-49da-bbab-1c5901ed68a6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[--------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="50" height="30" uuid="ab6d82b1-3e67-4830-b7de-a6b3fdd87417">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19a34a43-3dbd-4c2f-9cec-508243eb7eb0"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="66" height="30" uuid="7b014776-6233-4b37-a62d-043d050288b5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="453b1a6b-b782-4485-b758-942ba7e51afd"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quick Deals]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="47">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="30" uuid="f9e5f4fa-8e0f-40fd-b636-5c8c8b0d6f5b"/>
+				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="68" height="30" uuid="c24427ef-dc64-44d8-8854-8b3681aa2b57"/>
+				<textFieldExpression><![CDATA[$F{productPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="50" height="30" uuid="5b04830a-23fe-4e48-af04-a9755c3d42ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="19a34a43-3dbd-4c2f-9cec-508243eb7eb0"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="68" height="30" uuid="4f2d8f6b-7a23-4561-87dc-380b43ab5e19">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="453b1a6b-b782-4485-b758-942ba7e51afd"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ExpireDiscountStatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="66">
+			<textField>
+				<reportElement x="0" y="0" width="278" height="30" uuid="a168fd8f-0db3-468f-bb23-01901b0d2f70"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total:                                                         " + $F{totalAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="260" height="20" uuid="f7f3a780-a34c-4080-9c39-614d1ff311b2"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[--------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="11" width="260" height="20" uuid="5b2d7947-f48b-4d97-8178-523d89818c96"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[--------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-8" y="36" width="271" height="30" uuid="646a8be4-2cb6-4470-ad8b-b4a08d1f3232"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DialogInput"/>
+				</textElement>
+				<text><![CDATA[THANK YOU FOR SHOPPING @ NIROMI COSMETICS]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

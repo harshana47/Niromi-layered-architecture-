@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="652.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.PromotionFormController">
+    <ImageView fitHeight="652.0" fitWidth="1024.0">
+        <image>
+            <Image url="@../icon/white-abstract-wallpaper_23-2148830026.jpg" />
+        </image>
+    </ImageView>
+
+    <TableView fx:id="tblPromotions" layoutX="73.0" layoutY="134.0" prefHeight="394.0" prefWidth="568.0">
+        <columns>
+            <TableColumn fx:id="colPromotionId" prefWidth="150.0" text="Promotion Id" />
+            <TableColumn fx:id="colPromotionName" prefWidth="178.0" text="Promotion Name" />
+            <TableColumn fx:id="colDiscountPercentage" prefWidth="239.0" text="Disc Percentage" />
+        </columns>
+    </TableView>
+
+    <TextField fx:id="txtPromotionId" layoutX="703.0" layoutY="169.0" onKeyReleased="#txtPromotionIdOnKeyReleased" prefHeight="48.0" prefWidth="250.0" promptText="Promotion Id">
+        <effect>
+            <Blend />
+        </effect>
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font></TextField>
+    <TextField fx:id="txtPromotionName" layoutX="703.0" layoutY="288.0" onKeyReleased="#txtPromotionNameOnKeyReleased" prefHeight="48.0" prefWidth="250.0" promptText="Promotion Name">
+        <effect>
+            <Blend />
+        </effect>
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font></TextField>
+    <TextField fx:id="txtDiscountPercentage" layoutX="703.0" layoutY="399.0" onKeyReleased="#txtDiscountPercentageOnKeyReleased" prefHeight="48.0" prefWidth="250.0" promptText="Discount Percentage">
+        <effect>
+            <Blend />
+        </effect>
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font></TextField>
+
+    <Button fx:id="btnSave" layoutX="253.0" layoutY="562.0" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #008080;" text="Save" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+    <Button fx:id="btnUpdate" layoutX="358.0" layoutY="562.0" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #008080;" text="Update" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+    <Button fx:id="btnDelete" layoutX="567.0" layoutY="562.0" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #32DC84;" text="Delete" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+    <Button fx:id="btnSearch" layoutX="463.0" layoutY="562.0" onAction="#btnSearchOnAction" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #008080;" text="Search" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Button>
+   <Label layoutX="432.0" layoutY="48.0" prefHeight="48.0" prefWidth="210.0" text="Promotions">
+      <font>
+         <Font name="Georgia Bold" size="34.0" />
+      </font>
+   </Label>
+
+</AnchorPane>
