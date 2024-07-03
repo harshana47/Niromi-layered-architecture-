@@ -6,22 +6,24 @@ import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.OrderDAO;
 import lk.ijse.dao.custom.impl.OrderDAOImpl;
+import lk.ijse.entity.Order;
 import lk.ijse.model.OrderDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class OrderBoImpl implements OrderBO {
 
     OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
 
     public boolean save(OrderDTO orderDTO) throws SQLException, ClassNotFoundException {
-       return orderDAO.save(orderDTO);
+       return orderDAO.save(new Order(orderDTO.getOrderId(), orderDTO.getOrderDate(), orderDTO.getTotalAmount(), orderDTO.getCustomerId(), orderDTO.getPaymentId(), orderDTO.getPromoId(), orderDTO.getExpireDiscountStatus()));
     }
 
     @Override
-    public boolean update(OrderDTO dto) throws SQLException, ClassNotFoundException {
-        return orderDAO.update(dto);
+    public boolean update(OrderDTO orderDTO) throws SQLException, ClassNotFoundException {
+        return orderDAO.update(new Order(orderDTO.getOrderId(), orderDTO.getOrderDate(), orderDTO.getTotalAmount(), orderDTO.getCustomerId(), orderDTO.getPaymentId(), orderDTO.getPromoId(), orderDTO.getExpireDiscountStatus()));
     }
 
     @Override
@@ -40,8 +42,8 @@ public class OrderBoImpl implements OrderBO {
     }
 
     @Override
-    public void load(ObservableList<OrderDTO> DTOList) throws SQLException, ClassNotFoundException {
-
+    public List<OrderDTO> load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override

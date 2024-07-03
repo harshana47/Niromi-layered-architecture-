@@ -3,13 +3,15 @@ package lk.ijse.bo.impl;
 import javafx.collections.ObservableList;
 import lk.ijse.bo.custom.DepartmentBO;
 import lk.ijse.dao.DAOFactory;
-import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.DepartmentDAO;
-import lk.ijse.dao.custom.impl.DepartmentDAOImpl;
+import lk.ijse.entity.Customer;
+import lk.ijse.entity.Department;
+import lk.ijse.model.CustomerDTO;
 import lk.ijse.model.DepartmentDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DepartmentBoImpl implements DepartmentBO {
 
@@ -17,7 +19,7 @@ public class DepartmentBoImpl implements DepartmentBO {
 
     @Override
     public boolean save(DepartmentDTO dto) throws SQLException, ClassNotFoundException {
-        return departmentDAO.save(dto);
+        return departmentDAO.save(new Department(dto.getDepId(),dto.getName(),dto.getStaffCount()));
     }
 
     @Override
@@ -27,7 +29,14 @@ public class DepartmentBoImpl implements DepartmentBO {
 
     @Override
     public DepartmentDTO findById(String id) throws SQLException, ClassNotFoundException {
-        return departmentDAO.findById(id);
+        try{
+            Department dto = departmentDAO.findById(id);
+            return new DepartmentDTO(dto.getDepId(),dto.getName(),dto.getStaffCount());
+        }catch (SQLException e){
+            throw new SQLException("Error in finding department by id: "+e.getMessage());
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -37,16 +46,29 @@ public class DepartmentBoImpl implements DepartmentBO {
 
     @Override
     public DepartmentDTO search(String depId) throws SQLException, ClassNotFoundException {
-        return departmentDAO.search(depId);
+        try{
+            Department dto = departmentDAO.search(depId);
+            return new DepartmentDTO(dto.getDepId(),dto.getName(),dto.getStaffCount());
+        }catch (SQLException e){
+            throw new SQLException("Error in search department by id: "+e.getMessage());
+        }catch (ClassNotFoundException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public boolean update(DepartmentDTO departmentDTO) throws SQLException, ClassNotFoundException {
-        return departmentDAO.update(departmentDTO);
+        return departmentDAO.update(new Department(departmentDTO.getDepId(), departmentDTO.getName(),departmentDTO.getStaffCount()));
     }
 
     @Override
-    public void load(ObservableList<DepartmentDTO> departmentDTOList) throws SQLException, ClassNotFoundException {
-        departmentDAO.load(departmentDTOList);
+    public List<DepartmentDTO> load() throws SQLException, ClassNotFoundException {
+        List<Department> department = departmentDAO.load();
+        ArrayList<DepartmentDTO> departmentDTOS = new ArrayList<>();
+        for (Department d:department){
+            DepartmentDTO departmentDTO = new DepartmentDTO(d.getDepId(),d.getName(),d.getStaffCount());
+            departmentDTOS.add(departmentDTO);
+        }
+        return departmentDTOS;
     }
 }

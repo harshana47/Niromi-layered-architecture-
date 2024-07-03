@@ -8,6 +8,8 @@ import lk.ijse.model.CustomerDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDAOImpl implements CustomerDAO {
 
@@ -57,16 +59,14 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public void load(ObservableList<Customer> customerList) throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM customer");
-        while (resultSet.next()) {
-            customerList.add(new Customer(
-                    resultSet.getString("cusId"),
-                    resultSet.getString("name"),
-                    resultSet.getString("email"),
-                    resultSet.getString("phone")
-            ));
+    public List load() throws SQLException, ClassNotFoundException {
+        ArrayList<Customer> allCustomers = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT * FROM customer");
+        while (rst.next()) {
+            Customer  customer = new Customer(rst.getString("cusId"),rst.getString("name"),rst.getString("email"),rst.getString("phone"));
+             allCustomers.add(customer);
         }
+        return allCustomers;
     }
 
     @Override

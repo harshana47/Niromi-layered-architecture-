@@ -2,12 +2,11 @@ package lk.ijse.bo.custom;
 
 import javafx.collections.ObservableList;
 import lk.ijse.bo.SuperBO;
-import lk.ijse.dao.CrudDAO;
-import lk.ijse.dao.SQLUtil;
+import lk.ijse.entity.Customer;
 import lk.ijse.model.CustomerDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface CustomerBO extends SuperBO {
 
@@ -21,7 +20,7 @@ public interface CustomerBO extends SuperBO {
 
     public CustomerDTO findByPhone(String phone) throws SQLException, ClassNotFoundException;
 
-    public void load(ObservableList<CustomerDTO> customerDTOList) throws SQLException, ClassNotFoundException;
+    public List<CustomerDTO> load() throws SQLException, ClassNotFoundException;
 
     public CustomerDTO search(String id) throws SQLException, ClassNotFoundException;
 }

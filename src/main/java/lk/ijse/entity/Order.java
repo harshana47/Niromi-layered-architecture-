@@ -21,4 +21,14 @@ public class Order implements Serializable {
     private String promoId;
     private String expireDiscountStatus;
     private List<OrderProductDetail> orderProductDetailList;
+
+    public Order(String orderId, LocalDate orderDate, Double totalAmount, String customerId, String paymentId, String promoId, String expireDiscountStatus) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+        this.customerId = customerId;
+        this.paymentId = paymentId;
+        this.promoId = promoId;
+        this.expireDiscountStatus = expireDiscountStatus;
+    }
 }

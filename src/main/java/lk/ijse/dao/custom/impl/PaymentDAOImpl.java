@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.PaymentDAO;
 import lk.ijse.db.DbConnection;
+import lk.ijse.entity.Department;
 import lk.ijse.entity.Payment;
 import lk.ijse.model.PaymentDTO;
 
@@ -56,8 +57,17 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public void load(ObservableList<Payment> entityList) throws SQLException, ClassNotFoundException {
-        SQLUtil.execute("SELECT * FROM payment");
+    public List load() throws SQLException, ClassNotFoundException {
+        ArrayList<Payment> allPayment = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT * FROM payment");
+        while (rst.next()) {
+            Payment payment = new Payment(
+                    rst.getString("paymentId"),
+                    rst.getString("method")
+            );
+            allPayment.add(payment);
+        }
+        return allPayment;
     }
 
     public List<Payment> getAllPaymentMethods() throws SQLException, ClassNotFoundException {

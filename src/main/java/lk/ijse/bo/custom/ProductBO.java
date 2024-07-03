@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import lk.ijse.bo.SuperBO;
 import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SQLUtil;
+import lk.ijse.entity.OrderProductDetail;
 import lk.ijse.model.OrderProductDetailDTO;
 import lk.ijse.model.ProductDTO;
 
@@ -23,7 +24,7 @@ public interface ProductBO extends SuperBO {
 
     public boolean update(ProductDTO productDTO) throws SQLException, ClassNotFoundException;
 
-    public boolean updateQTY(List<OrderProductDetailDTO> odList) throws SQLException, ClassNotFoundException;
+    public boolean updateQTY(List<OrderProductDetail> odList) throws SQLException, ClassNotFoundException;
 
     public List<ProductDTO> getAllProducts() throws SQLException, ClassNotFoundException;
 

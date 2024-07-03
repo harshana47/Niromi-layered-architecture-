@@ -66,6 +66,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
+    public List<Employee> load() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
     public void load(ObservableList<Employee> EntityList) throws SQLException, ClassNotFoundException {
         EntityList.clear();
         EntityList.addAll(getAllEmployees());

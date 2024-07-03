@@ -1,17 +1,12 @@
 package lk.ijse.dao.custom.impl;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.SalesDAO;
-import lk.ijse.db.DbConnection;
 import lk.ijse.entity.OrderProductDetail;
-import lk.ijse.model.OrderProductDetailDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SalesDAOImpl implements SalesDAO {
     @Override
@@ -40,8 +35,9 @@ public class SalesDAOImpl implements SalesDAO {
     }
 
     @Override
-    public void load(ObservableList DTOList) throws SQLException, ClassNotFoundException {
+    public List load() throws SQLException, ClassNotFoundException {
 
+        return null;
     }
 
     public OrderProductDetail search(String orderId) throws SQLException, ClassNotFoundException {

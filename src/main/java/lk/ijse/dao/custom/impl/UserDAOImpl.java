@@ -42,8 +42,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void load(ObservableList<User> DTOList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override

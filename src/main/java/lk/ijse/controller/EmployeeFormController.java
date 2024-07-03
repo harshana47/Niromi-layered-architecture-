@@ -156,7 +156,7 @@ public class EmployeeFormController {
             colEmail.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getEmail()));
             tblEmployees.setItems(employeeDTOList) ;
 
-            employeeBO.load(employeeDTOList);
+            employeeBO.load();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Error initializing: " + e.getMessage()).show();
         }

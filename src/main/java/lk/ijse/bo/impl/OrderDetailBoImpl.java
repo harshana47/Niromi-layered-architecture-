@@ -7,6 +7,9 @@ import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.OrderDetailDAO;
 import lk.ijse.dao.custom.impl.OrderDetailDAOImpl;
 import lk.ijse.db.DbConnection;
+import lk.ijse.entity.Department;
+import lk.ijse.entity.OrderProductDetail;
+import lk.ijse.model.DepartmentDTO;
 import lk.ijse.model.OrderProductDetailDTO;
 
 import java.sql.Connection;
@@ -20,10 +23,16 @@ public class OrderDetailBoImpl implements OrderDetailBO {
 
     OrderDetailDAO orderDetailDAO = (OrderDetailDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAIL);
 
-    public boolean saveOrderProductDetail(List<OrderProductDetailDTO> odList) {
+    public boolean saveOrderProductDetail(List<OrderProductDetail> odList) {
         return orderDetailDAO.saveOrderProductDetail(odList);
     }
     public List<OrderProductDetailDTO> getAllOrderProductDetails() throws SQLException, ClassNotFoundException {
-        return orderDetailDAO.getAllOrderProductDetails();
+        List<OrderProductDetail> orderProductDetails = orderDetailDAO.load();
+        ArrayList<OrderProductDetailDTO> orderProductDetailDTOS = new ArrayList<>();
+        for(OrderProductDetail od : orderProductDetails) {
+            OrderProductDetailDTO orderProductDetailDTO = new OrderProductDetailDTO(od.getOrderId(), od.getProductId(), od.getQty(),od.getTotal(),od.getOrderDate());
+            orderProductDetailDTOS.add(orderProductDetailDTO);
+        }
+        return orderProductDetailDTOS;
     }
 }

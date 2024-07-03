@@ -15,6 +15,7 @@ import lk.ijse.bo.custom.ProductBO;
 import lk.ijse.bo.custom.SupplierProductDetailBO;
 import lk.ijse.bo.impl.ProductBoImpl;
 import lk.ijse.bo.impl.SupplierProductBoImpl;
+import lk.ijse.dao.DAOFactory;
 import lk.ijse.model.ProductDTO;
 import lk.ijse.model.SupplierProductDetailDTO;
 import lk.ijse.dao.custom.impl.ProductDAOImpl;
@@ -89,7 +90,7 @@ public class ProductFormController {
     @FXML
     private TextField txtPromotionId;
 
-    SupplierDAOImpl supplierDAO = (SupplierDAOImpl) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.SUPPLIER);
+    SupplierDAOImpl supplierDAO = (SupplierDAOImpl) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.SUPPLIER);
 
 
     private ObservableList<ProductDTO> productDTOList = FXCollections.observableArrayList();

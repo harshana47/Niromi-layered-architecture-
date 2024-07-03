@@ -8,6 +8,8 @@ import lk.ijse.model.DepartmentDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
 
@@ -60,14 +62,17 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     }
 
     @Override
-    public void load(ObservableList<Department> departmentList) throws SQLException, ClassNotFoundException {
+    public List load() throws SQLException, ClassNotFoundException {
+        ArrayList<Department> allDepartment = new ArrayList<>();
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM department");
         while (resultSet.next()) {
-            departmentList.add(new Department(
+            Department department =new Department(
                     resultSet.getString("depId"),
                     resultSet.getString("name"),
                     resultSet.getInt("staffCount")
-            ));
+            );
+            allDepartment.add(department);
         }
+        return allDepartment;
     }
 }

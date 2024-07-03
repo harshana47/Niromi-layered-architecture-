@@ -36,8 +36,8 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public void load(ObservableList<Supplier> DTOList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     public boolean update(Supplier entity) throws SQLException, ClassNotFoundException {

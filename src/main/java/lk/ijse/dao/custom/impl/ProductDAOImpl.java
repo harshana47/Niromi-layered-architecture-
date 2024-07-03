@@ -103,8 +103,8 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void load(ObservableList<Product> entityList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     public List<Product> getExpiringProducts(LocalDate thresholdDate) throws SQLException, ClassNotFoundException {

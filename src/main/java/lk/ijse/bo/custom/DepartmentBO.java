@@ -2,12 +2,11 @@ package lk.ijse.bo.custom;
 
 import javafx.collections.ObservableList;
 import lk.ijse.bo.SuperBO;
-import lk.ijse.dao.CrudDAO;
-import lk.ijse.dao.SQLUtil;
+import lk.ijse.entity.Department;
 import lk.ijse.model.DepartmentDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface DepartmentBO extends SuperBO {
     public boolean save(DepartmentDTO dto) throws SQLException, ClassNotFoundException;
@@ -22,5 +21,5 @@ public interface DepartmentBO extends SuperBO {
 
     public boolean update(DepartmentDTO departmentDTO) throws SQLException, ClassNotFoundException;
 
-    public void load(ObservableList<DepartmentDTO> departmentDTOList) throws SQLException, ClassNotFoundException;
+    public List<DepartmentDTO> load() throws SQLException, ClassNotFoundException;
 }

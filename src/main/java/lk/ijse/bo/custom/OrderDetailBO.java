@@ -5,6 +5,7 @@ import lk.ijse.bo.SuperBO;
 import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.db.DbConnection;
+import lk.ijse.entity.OrderProductDetail;
 import lk.ijse.model.OrderProductDetailDTO;
 
 import java.sql.Connection;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public interface OrderDetailBO extends SuperBO {
 
-    public boolean saveOrderProductDetail(List<OrderProductDetailDTO> odList);
+    public boolean saveOrderProductDetail(List<OrderProductDetail> odList);
 
     public List<OrderProductDetailDTO> getAllOrderProductDetails() throws SQLException, ClassNotFoundException;
 }

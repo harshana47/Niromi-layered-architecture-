@@ -28,7 +28,7 @@ public interface PaymentBO extends SuperBO {
 
     public PaymentDTO findByPhone(String phone) throws SQLException, ClassNotFoundException;
 
-    public void load(ObservableList<PaymentDTO> DTOList) throws SQLException, ClassNotFoundException;
+    public List<PaymentDTO> load() throws SQLException, ClassNotFoundException;
 
     public List<PaymentDTO> getAllPaymentMethods() throws SQLException, ClassNotFoundException;
 

@@ -24,6 +24,7 @@ import lk.ijse.bo.custom.*;
 import lk.ijse.bo.impl.*;
 import lk.ijse.dao.custom.impl.*;
 import lk.ijse.db.DbConnection;
+import lk.ijse.entity.Order;
 import lk.ijse.model.*;
 import lk.ijse.tdm.CartTm;
 import net.sf.jasperreports.engine.*;
@@ -92,6 +93,7 @@ public class OrderFormController {
     CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.CUSTOMER);
     OrderBO orderBO = (OrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ORDER);
     PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PAYMENT);
+    OrderDetailBO orderDetailBO = (OrderDetailBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ORDERDETAIL);
 
     private final ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
@@ -379,6 +381,7 @@ public class OrderFormController {
         try {
             String paymentId = paymentBO.getPaymentIdByMethod(paymentMethod);
 
+            Order order = new Order();
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setOrderId(orderId);
             orderDTO.setCustomerId(customerId);
@@ -421,16 +424,14 @@ public class OrderFormController {
                 connection.rollback();
                 connection.setAutoCommit(true);
             }
-            OrderDetailDAOImpl orderDetailRepo = new OrderDetailDAOImpl();
-            boolean isOrderDetailSaved = orderDetailRepo.saveOrderProductDetail(orderDTO.getOrderProductDetailDTOList());
+            boolean isOrderDetailSaved = orderDetailBO.saveOrderProductDetail(order.getOrderProductDetailList());
             if (!isOrderDetailSaved) {
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
             }
 
-            ProductDAOImpl productRepo = new ProductDAOImpl();
-            boolean isQtyUpdated = productRepo.updateQTY(orderDTO.getOrderProductDetailDTOList());
+            boolean isQtyUpdated = productBO.updateQTY(order.getOrderProductDetailList());
             if (!isQtyUpdated) {
                 connection.rollback();
                 connection.setAutoCommit(true);

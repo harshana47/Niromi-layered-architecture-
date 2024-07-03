@@ -6,6 +6,7 @@ import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.PromotionDAO;
 import lk.ijse.dao.custom.impl.PromotionDAOImpl;
+import lk.ijse.entity.Promotion;
 import lk.ijse.model.PromotionDTO;
 
 import java.sql.ResultSet;
@@ -18,11 +19,11 @@ public class PromotionBoImpl implements PromotionBO {
     PromotionDAO promotionDAO = (PromotionDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PROMOTION);
 
     public boolean save(PromotionDTO promotionDTO) throws SQLException, ClassNotFoundException {
-        return promotionDAO.save(promotionDTO);
+        return promotionDAO.save(new Promotion(promotionDTO.getPromoId(), promotionDTO.getPromoName(), promotionDTO.getDiscountPercentage()));
     }
 
     public boolean update(PromotionDTO promotionDTO) throws SQLException, ClassNotFoundException {
-        return promotionDAO.update(promotionDTO);
+        return promotionDAO.update(new Promotion(promotionDTO.getPromoId(), promotionDTO.getPromoName(), promotionDTO.getDiscountPercentage()));
     }
 
     public boolean delete(String promoId) throws SQLException, ClassNotFoundException {
@@ -30,11 +31,22 @@ public class PromotionBoImpl implements PromotionBO {
     }
 
     public PromotionDTO search(String promoId) throws SQLException, ClassNotFoundException {
-        return promotionDAO.search(promoId);
+        try {
+            Promotion promotion = promotionDAO.search(promoId);
+            return new PromotionDTO(promotion.getPromoId(), promotion.getPromoName(), promotion.getDiscountPercentage());
+        }catch (Exception e) {
+            throw new SQLException("Promotion not found!");
+        }
     }
 
     public List<PromotionDTO> getAllPromotions() throws SQLException, ClassNotFoundException {
-        return promotionDAO.getAllPromotions();
+        List<Promotion> promotions = new ArrayList<>();
+        ArrayList<PromotionDTO> promotionDTOS = new ArrayList<>();
+        for (Promotion p:promotions){
+            PromotionDTO promotionDTO = new PromotionDTO(p.getPromoId(),p.getPromoName(),p.getDiscountPercentage());
+            promotionDTOS.add(promotionDTO);
+        }
+        return promotionDTOS;
     }
 
     public List<String> getAllPromoNames() throws SQLException, ClassNotFoundException {
@@ -42,7 +54,12 @@ public class PromotionBoImpl implements PromotionBO {
     }
 
     public PromotionDTO findById(String promoId) throws SQLException, ClassNotFoundException {
-        return promotionDAO.findById(promoId);
+        try {
+            Promotion promotion = promotionDAO.findById(promoId);
+            return new PromotionDTO(promotion.getPromoId(), promotion.getPromoName(), promotion.getDiscountPercentage());
+        }catch (SQLException e) {
+            throw new SQLException("Promotion not found!");
+        }
     }
 
     @Override

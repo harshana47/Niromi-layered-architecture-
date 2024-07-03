@@ -6,6 +6,10 @@ import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.ProductDAO;
 import lk.ijse.dao.custom.impl.ProductDAOImpl;
+import lk.ijse.entity.Customer;
+import lk.ijse.entity.OrderProductDetail;
+import lk.ijse.entity.Product;
+import lk.ijse.model.CustomerDTO;
 import lk.ijse.model.OrderProductDetailDTO;
 import lk.ijse.model.ProductDTO;
 
@@ -19,26 +23,42 @@ public class ProductBoImpl implements ProductBO {
 
     ProductDAO productDAO = (ProductDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.PRODUCT);
 
+    @Override
     public boolean save(ProductDTO productDTO) throws SQLException, ClassNotFoundException {
-        return productDAO.save(productDTO);
+        return productDAO.save(new Product(productDTO.getProductId(), productDTO.getName(),productDTO.getExpireDate(), productDTO.getPrice(), productDTO.getQtyOnHand(), productDTO.getEmployeeId(), productDTO.getPromoId(), productDTO.getSupplierName()));
     }
 
+    @Override
     public boolean delete(String productId) throws SQLException, ClassNotFoundException {
         return productDAO.delete(productId);
     }
 
     public ProductDTO search(String productId) throws SQLException, ClassNotFoundException {
-        return productDAO.search(productId);
+        try {
+            Product product = productDAO.search(productId);
+            return new ProductDTO(product.getProductId(), product.getName(), product.getExpireDate(), product.getPrice(), product.getQtyOnHand(), product.getEmployeeId(), product.getPromoId(), product.getSupplierName());
+        }catch (SQLException e){
+            throw new SQLException("Product not found: " + e.getMessage());
+        }catch (ClassNotFoundException e){
+            throw new ClassNotFoundException("Class not found: " + e.getMessage());
+        }
     }
 
     public boolean update(ProductDTO productDTO) throws SQLException, ClassNotFoundException {
-        return productDAO.update(productDTO);
+        return productDAO.update(new Product(productDTO.getProductId(), productDTO.getName(),productDTO.getExpireDate(), productDTO.getPrice(), productDTO.getQtyOnHand(), productDTO.getEmployeeId(), productDTO.getPromoId(), productDTO.getSupplierName()));
     }
-    public boolean updateQTY(List<OrderProductDetailDTO> odList) throws SQLException, ClassNotFoundException {
+    @Override
+    public boolean updateQTY(List<OrderProductDetail> odList) throws SQLException, ClassNotFoundException {
         return productDAO.updateQTY(odList);
     }
     public List<ProductDTO> getAllProducts() throws SQLException, ClassNotFoundException {
-        return productDAO.getAllProducts();
+        List<Product> products = productDAO.getAllProducts();
+        ArrayList<ProductDTO> productDTOS = new ArrayList<>();
+        for (Product p:products){
+            ProductDTO productDTO = new ProductDTO(p.getProductId(), p.getName(),p.getExpireDate(), p.getPrice(), p.getQtyOnHand(), p.getEmployeeId(), p.getPromoId(), p.getSupplierName());
+            productDTOS.add(productDTO);
+        }
+        return productDTOS;
     }
 
     public LocalDate getProductExpirationDate(String productId) throws SQLException, ClassNotFoundException {
@@ -46,7 +66,14 @@ public class ProductBoImpl implements ProductBO {
     }
 
     public ProductDTO findById(String productId) throws SQLException, ClassNotFoundException {
-        return productDAO.findById(productId);
+        try {
+            Product product = productDAO.findById(productId);
+            return new ProductDTO(product.getProductId(), product.getName(), product.getExpireDate(), product.getPrice(), product.getQtyOnHand(), product.getEmployeeId(), product.getPromoId(), product.getSupplierName());
+        }catch (SQLException e) {
+            throw new SQLException("Product not found: " + e.getMessage());
+        }catch (ClassNotFoundException e){
+            throw new ClassNotFoundException("Class not found: " + e.getMessage());
+        }
     }
 
     @Override
@@ -60,6 +87,12 @@ public class ProductBoImpl implements ProductBO {
     }
 
     public List<ProductDTO> getExpiringProducts(LocalDate thresholdDate) throws SQLException, ClassNotFoundException {
-        return productDAO.getExpiringProducts(thresholdDate);
+        List<Product> products = productDAO.getExpiringProducts(thresholdDate);
+        ArrayList<ProductDTO> productDTOS = new ArrayList<>();
+        for (Product p: products){
+            ProductDTO productDTO = new ProductDTO(p.getProductId(), p.getName(), p.getExpireDate(), p.getPrice(), p.getQtyOnHand(), p.getEmployeeId(), p.getPromoId(), p.getSupplierName());
+            productDTOS.add(productDTO);
+        }
+        return productDTOS;
     }
 }

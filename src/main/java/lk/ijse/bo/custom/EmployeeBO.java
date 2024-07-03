@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import lk.ijse.bo.SuperBO;
 import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SQLUtil;
+import lk.ijse.entity.Employee;
 import lk.ijse.model.EmployeeDTO;
 
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public interface EmployeeBO extends SuperBO {
 
     public EmployeeDTO findByPhone(String phone) throws SQLException, ClassNotFoundException;
 
-    public void load(ObservableList<EmployeeDTO> DTOList) throws SQLException, ClassNotFoundException;
+    public List<EmployeeDTO> load() throws SQLException, ClassNotFoundException;
 
     public List<EmployeeDTO> getAllEmployees() throws SQLException, ClassNotFoundException;
 

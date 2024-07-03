@@ -86,8 +86,8 @@ public class PromotionDAOImpl implements PromotionDAO {
     }
 
     @Override
-    public void load(ObservableList<Promotion> DTOList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     public String findPromotionByName(String promoName) throws SQLException, ClassNotFoundException {

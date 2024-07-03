@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface CrudDAO <T> extends SuperDAO{
     public boolean save(T entity) throws SQLException, ClassNotFoundException;
@@ -22,7 +23,7 @@ public interface CrudDAO <T> extends SuperDAO{
 
     public T findByPhone(String phone) throws SQLException, ClassNotFoundException;
 
-    public void load(ObservableList<T> EntityList) throws SQLException, ClassNotFoundException;
+    public List<T> load() throws SQLException, ClassNotFoundException;
     public T search(String id) throws SQLException, ClassNotFoundException;
 
 }

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
 
@@ -46,8 +47,8 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void load(ObservableList<Order> EntityList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override

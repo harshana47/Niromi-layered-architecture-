@@ -4,10 +4,12 @@ import javafx.collections.ObservableList;
 import lk.ijse.bo.SuperBO;
 import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SQLUtil;
+import lk.ijse.entity.Order;
 import lk.ijse.model.OrderDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface OrderBO extends SuperBO {
 
@@ -21,7 +23,7 @@ public interface OrderBO extends SuperBO {
 
     public OrderDTO findByPhone(String phone) throws SQLException, ClassNotFoundException;
 
-    public void load(ObservableList<OrderDTO> DTOList) throws SQLException, ClassNotFoundException;
+    public List<OrderDTO> load() throws SQLException, ClassNotFoundException;
 
     public OrderDTO search(String id) throws SQLException, ClassNotFoundException;
 

@@ -10,6 +10,7 @@ import lk.ijse.entity.SupplierProductDetail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SupplierProductDAOImpl implements SupplierProductDetailDAO {
 
@@ -37,8 +38,8 @@ public class SupplierProductDAOImpl implements SupplierProductDetailDAO {
     }
 
     @Override
-    public void load(ObservableList<SupplierProductDetail> entityList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override

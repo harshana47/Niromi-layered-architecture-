@@ -23,6 +23,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
             connection = DbConnection.getInstance().getConnection();
             String sql = "INSERT INTO orderProductDetails (orderId, productId, quantity, itemPrice, date) VALUES (?,?,?,?,?)";
             pst = connection.prepareStatement(sql);
+            //aa
 
             for (OrderProductDetail od : odList) {
                 System.out.println(od);
@@ -86,8 +87,8 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
     }
 
     @Override
-    public void load(ObservableList<OrderProductDetail> DTOList) throws SQLException, ClassNotFoundException {
-
+    public List load() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override
