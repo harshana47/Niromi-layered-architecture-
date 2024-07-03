@@ -37,4 +37,5 @@ public interface EmployeeBO extends SuperBO {
     public boolean decreaseStaffCount(String depId) throws SQLException, ClassNotFoundException;
 
     public List<String> getAllEmployeeEmails() throws SQLException, ClassNotFoundException;
+
 }

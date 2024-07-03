@@ -75,20 +75,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         EntityList.addAll(getAllEmployees());
     }
 
-    public List<Employee> getAllEmployees() throws SQLException, ClassNotFoundException {
+    public List getAllEmployees() throws SQLException, ClassNotFoundException {
+        ArrayList<Employee> allEmployees = new ArrayList<>();
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM employee");
-        List<Employee> employeeList = new ArrayList<>();
         while (resultSet.next()) {
-            employeeList.add(new Employee(
+            Employee employee = new Employee(
                     resultSet.getString("employeeId"),
                     resultSet.getString("name"),
                     resultSet.getString("depId"),
                     resultSet.getString("position"),
                     resultSet.getString("duty"),
                     resultSet.getString("email")
-            ));
+            );
+            allEmployees.add(employee);
         }
-        return employeeList;
+        return allEmployees;
     }
 
     public int getEmployeeCount() throws SQLException, ClassNotFoundException {

@@ -1,5 +1,6 @@
 package lk.ijse.entity;
 
+import lk.ijse.model.OrderProductDetailDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Order implements Serializable {
     private String promoId;
     private String expireDiscountStatus;
     private List<OrderProductDetail> orderProductDetailList;
+
 
     public Order(String orderId, LocalDate orderDate, Double totalAmount, String customerId, String paymentId, String promoId, String expireDiscountStatus) {
         this.orderId = orderId;

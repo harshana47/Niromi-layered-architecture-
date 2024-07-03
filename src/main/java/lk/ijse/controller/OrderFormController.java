@@ -25,6 +25,7 @@ import lk.ijse.bo.impl.*;
 import lk.ijse.dao.custom.impl.*;
 import lk.ijse.db.DbConnection;
 import lk.ijse.entity.Order;
+import lk.ijse.entity.OrderProductDetail;
 import lk.ijse.model.*;
 import lk.ijse.tdm.CartTm;
 import net.sf.jasperreports.engine.*;
@@ -381,30 +382,30 @@ public class OrderFormController {
         try {
             String paymentId = paymentBO.getPaymentIdByMethod(paymentMethod);
 
-            Order order = new Order();
-            OrderDTO orderDTO = new OrderDTO();
-            orderDTO.setOrderId(orderId);
-            orderDTO.setCustomerId(customerId);
-            orderDTO.setPaymentId(paymentId);
-            orderDTO.setPromoId(promoId);
-            orderDTO.setExpireDiscountStatus(expireStatus);
-            orderDTO.setTotalAmount(Double.valueOf(total));
+            Order order1 = new Order();
+            OrderDTO order = new OrderDTO();
+            order.setOrderId(orderId);
+            order.setCustomerId(customerId);
+            order.setPaymentId(paymentId);
+            order.setPromoId(promoId);
+            order.setExpireDiscountStatus(expireStatus);
+            order.setTotalAmount(Double.valueOf(total));
 
             LocalDate orderDate = LocalDate.now();
-            orderDTO.setOrderDate(orderDate);
+            order.setOrderDate(orderDate);
 
-            List<OrderProductDetailDTO> list = obList.stream().map(product -> {
-                return OrderProductDetailDTO.builder()
+            List<OrderProductDetail> list = obList.stream().map(product -> {
+                return OrderProductDetail.builder()
                         .orderId(orderId)
                         .productId(product.getProductId())
                         .qty(product.getQty())
-                        .total(orderDTO.getTotalAmount())
+                        .total(order.getTotalAmount())
                         .orderDate(orderDate)
                         .build();
             }).toList();
-            orderDTO.setOrderProductDetailDTOList(list);
+            order1.setOrderProductDetailList(list);
 
-            boolean isOrderSaved = orderBO.save(orderDTO);
+            boolean isOrderSaved = orderBO.save(order);
             new Alert(Alert.AlertType.INFORMATION,
                     isOrderSaved ? "Order saved successfully"
                             : "Ooops something went wrong").show();
@@ -424,14 +425,14 @@ public class OrderFormController {
                 connection.rollback();
                 connection.setAutoCommit(true);
             }
-            boolean isOrderDetailSaved = orderDetailBO.saveOrderProductDetail(order.getOrderProductDetailList());
+            boolean isOrderDetailSaved = orderDetailBO.saveOrderProductDetail(order1.getOrderProductDetailList());
             if (!isOrderDetailSaved) {
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
             }
 
-            boolean isQtyUpdated = productBO.updateQTY(order.getOrderProductDetailList());
+            boolean isQtyUpdated = productBO.updateQTY(order1.getOrderProductDetailList());
             if (!isQtyUpdated) {
                 connection.rollback();
                 connection.setAutoCommit(true);

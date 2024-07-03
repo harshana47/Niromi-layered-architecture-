@@ -84,7 +84,7 @@ CustomerFormController {
     private void loadCustomers() throws ClassNotFoundException {
         try {
             customerDTOList.clear();
-            customerBO.load();
+            customerDTOList.addAll(customerBO.load());
             tblCustomers.setItems(customerDTOList);
             tblCustomers.refresh();
         } catch (SQLException e) {
