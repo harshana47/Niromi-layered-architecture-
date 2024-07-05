@@ -63,12 +63,17 @@ public class DepartmentBoImpl implements DepartmentBO {
 
     @Override
     public List<DepartmentDTO> load() throws SQLException, ClassNotFoundException {
-        List<Department> department = departmentDAO.load();
-        ArrayList<DepartmentDTO> departmentDTOS = new ArrayList<>();
-        for (Department d:department){
-            DepartmentDTO departmentDTO = new DepartmentDTO(d.getDepId(),d.getName(),d.getStaffCount());
-            departmentDTOS.add(departmentDTO);
+        try {
+            List<Department> department = departmentDAO.load();
+            List<DepartmentDTO> departmentDTOS = new ArrayList<>();
+            for (Department d : department) {
+                departmentDTOS.add(new DepartmentDTO(d.getDepId(), d.getName(), d.getStaffCount()));
+            }
+            return departmentDTOS;
+        }catch (SQLException e){
+            throw new SQLException("Error while getting department: "+ e.getMessage());
+        }catch (ClassCastException e){
+            throw new ClassNotFoundException("Error while getting department: "+ e.getMessage());
         }
-        return departmentDTOS;
     }
 }

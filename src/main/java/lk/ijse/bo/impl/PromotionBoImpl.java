@@ -39,14 +39,19 @@ public class PromotionBoImpl implements PromotionBO {
         }
     }
 
-    public List<PromotionDTO> getAllPromotions() throws SQLException, ClassNotFoundException {
-        List<Promotion> promotions = new ArrayList<>();
-        ArrayList<PromotionDTO> promotionDTOS = new ArrayList<>();
-        for (Promotion p:promotions){
-            PromotionDTO promotionDTO = new PromotionDTO(p.getPromoId(),p.getPromoName(),p.getDiscountPercentage());
-            promotionDTOS.add(promotionDTO);
+    public List<PromotionDTO> getAllPromotions() throws ClassNotFoundException, SQLException {
+        try {
+            List<Promotion> promotions = promotionDAO.getAllPromotions();
+            List<PromotionDTO> promotionDTOS = new ArrayList<>();
+            for (Promotion promotionDTO : promotions) {
+                promotionDTOS.add(new PromotionDTO(promotionDTO.getPromoId(), promotionDTO.getPromoName(), promotionDTO.getDiscountPercentage()));
+            }
+            return promotionDTOS;
+        }catch (SQLException e) {
+            throw new SQLException("Error while getting promotion: "+e.getMessage());
+        }catch (ClassNotFoundException e){
+            throw new ClassNotFoundException("Error while getting promotion: "+e.getMessage());
         }
-        return promotionDTOS;
     }
 
     public List<String> getAllPromoNames() throws SQLException, ClassNotFoundException {

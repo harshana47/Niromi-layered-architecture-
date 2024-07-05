@@ -155,7 +155,7 @@ public class DepartmentFormController {
 
         tblDepartments.setItems(departmentDTOList);
 
-        departmentBO.load();
+        departmentDTOList.addAll(departmentBO.load());
     }
 
     public void txtDepartmentIDOnKeyReleased(KeyEvent keyEvent) {
