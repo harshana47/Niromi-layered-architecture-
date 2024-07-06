@@ -19,9 +19,9 @@
        o.totalAmount AS orderTotalAmount,
        opd.quantity AS quantity
 FROM orders o
-JOIN orderProductDetailDTOS opd ON o.orderId = opd.orderId
-JOIN productDTO p ON opd.productId = p.productId
-LEFT JOIN promotionDTO pm ON p.promoId = pm.promoId
+JOIN orderProductDetails opd ON o.orderId = opd.orderId
+JOIN product p ON opd.productId = p.productId
+LEFT JOIN promotion pm ON p.promoId = pm.promoId
 WHERE o.orderId = (SELECT MAX(orderId) FROM orders)
 GROUP BY o.orderId, o.orderDate, p.name, p.price, pm.promoName, pm.discountPercentage, o.totalAmount, opd.quantity;]]>
 	</queryString>
