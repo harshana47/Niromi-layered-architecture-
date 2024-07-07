@@ -27,12 +27,15 @@ public class OrderDetailBoImpl implements OrderDetailBO {
         return orderDetailDAO.saveOrderProductDetail(odList);
     }
     public List<OrderProductDetailDTO> getAllOrderProductDetails() throws SQLException, ClassNotFoundException {
-        List<OrderProductDetail> orderProductDetails = orderDetailDAO.load();
-        ArrayList<OrderProductDetailDTO> orderProductDetailDTOS = new ArrayList<>();
-        for(OrderProductDetail od : orderProductDetails) {
-            OrderProductDetailDTO orderProductDetailDTO = new OrderProductDetailDTO(od.getOrderId(), od.getProductId(), od.getQty(),od.getTotal(),od.getOrderDate());
-            orderProductDetailDTOS.add(orderProductDetailDTO);
+        try {
+            List<OrderProductDetail> orderProductDetails = orderDetailDAO.getAllOrderProductDetails();
+            List<OrderProductDetailDTO> orderProductDetailDTOS = new ArrayList<>();
+            for (OrderProductDetail od : orderProductDetails) {
+                orderProductDetailDTOS.add(new OrderProductDetailDTO(od.getOrderId(), od.getProductId(), od.getQty(), od.getTotal(), od.getOrderDate()));
+            }
+            return orderProductDetailDTOS;
+        }catch (SQLException e){
+            throw new SQLException("Error getting order detail"+ e.getMessage());
         }
-        return orderProductDetailDTOS;
     }
 }

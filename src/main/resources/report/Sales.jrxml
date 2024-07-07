@@ -5,7 +5,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
 	<parameter name="p_txtDate" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM orderProductDetailDTOS WHERE date = $P{p_txtDate}]]>
+		<![CDATA[SELECT * FROM orderProductDetails WHERE date = $P{p_txtDate}]]>
 	</queryString>
 	<field name="orderId" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="orderId"/>
