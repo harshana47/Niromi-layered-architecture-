@@ -154,9 +154,10 @@ public class ProductFormController {
     void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         ProductDTO selectedProductDTO = tblProducts.getSelectionModel().getSelectedItem();
         if (selectedProductDTO != null) {
-            boolean isDeleted = productBO.delete(selectedProductDTO.getProductId());
+            boolean isDeleted =productBO.deleteDetails(selectedProductDTO.getProductId());
             if (isDeleted) {
                 tblProducts.getItems().remove(selectedProductDTO);
+                productBO.delete(selectedProductDTO.getProductId());
             } else {
                 System.out.println("Failed to delete product!");
             }

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductDAO extends CrudDAO<Product> {
+    public boolean deleteDetails(String productId) throws SQLException, ClassNotFoundException;
 
     public boolean updateQTY(List<OrderProductDetail> odList) throws SQLException, ClassNotFoundException;
 

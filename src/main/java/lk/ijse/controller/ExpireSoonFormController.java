@@ -126,9 +126,10 @@ public class ExpireSoonFormController {
         ProductDTO selectedProductDTO = tblExpireProducts.getSelectionModel().getSelectedItem();
         if (selectedProductDTO != null) {
             // Delete product from repository
-            boolean isDeleted = productBO.delete(selectedProductDTO.getProductId());
+            boolean isDeleted =productBO.deleteDetails(selectedProductDTO.getProductId());
             if (isDeleted) {
                 tblExpireProducts.getItems().remove(selectedProductDTO);
+                productBO.delete(selectedProductDTO.getProductId());
             } else {
                 System.out.println("Failed to delete product!");
             }

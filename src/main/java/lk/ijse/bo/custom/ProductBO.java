@@ -20,6 +20,8 @@ public interface ProductBO extends SuperBO {
 
     public boolean delete(String productId) throws SQLException, ClassNotFoundException;
 
+    public boolean deleteDetails(String productId) throws SQLException, ClassNotFoundException;
+
     public ProductDTO search(String productId) throws SQLException, ClassNotFoundException;
 
     public boolean update(ProductDTO productDTO) throws SQLException, ClassNotFoundException;

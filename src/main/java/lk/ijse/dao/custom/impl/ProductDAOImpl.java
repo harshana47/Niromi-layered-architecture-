@@ -25,6 +25,10 @@ public class ProductDAOImpl implements ProductDAO {
         return SQLUtil.execute("DELETE FROM product WHERE productId=?",productId);
     }
 
+    public boolean deleteDetails(String productId) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("DELETE FROM supplierProductDetails WHERE productId=?",productId);
+    }
+
 
     public Product search(String productId) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM product WHERE productId=?",productId);

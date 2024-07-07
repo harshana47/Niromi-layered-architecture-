@@ -33,6 +33,11 @@ public class ProductBoImpl implements ProductBO {
         return productDAO.delete(productId);
     }
 
+    @Override
+    public boolean deleteDetails(String productId) throws SQLException, ClassNotFoundException {
+        return productDAO.deleteDetails(productId);
+    }
+
     public ProductDTO search(String productId) throws SQLException, ClassNotFoundException {
         try {
             Product product = productDAO.search(productId);
