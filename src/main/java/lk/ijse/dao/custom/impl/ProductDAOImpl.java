@@ -25,6 +25,7 @@ public class ProductDAOImpl implements ProductDAO {
         return SQLUtil.execute("DELETE FROM product WHERE productId=?",productId);
     }
 
+
     public Product search(String productId) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM product WHERE productId=?",productId);
         if (resultSet.next()) {
@@ -108,6 +109,21 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     public List<Product> getExpiringProducts(LocalDate thresholdDate) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT * FROM product WHERE expireDate <= ?",thresholdDate);
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM product WHERE expireDate <= ?",thresholdDate);
+        List<Product> productList = new ArrayList<>();
+        while (resultSet.next()) {
+            Product product = new Product(
+                    resultSet.getString("productId"),
+                    resultSet.getString("name"),
+                    resultSet.getString("expireDate"),
+                    resultSet.getDouble("price"),
+                    resultSet.getInt("qtyOnHand"),
+                    resultSet.getString("employeeId"),
+                    resultSet.getString("promoId"),
+                    resultSet.getString("supplierName")
+            );
+            productList.add(product);
+        }
+        return productList;
     }
 }
