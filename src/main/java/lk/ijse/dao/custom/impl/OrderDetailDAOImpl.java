@@ -23,7 +23,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
             connection = DbConnection.getInstance().getConnection();
             String sql = "INSERT INTO orderProductDetails (orderId, productId, quantity, itemPrice, date) VALUES (?,?,?,?,?)";
             pst = connection.prepareStatement(sql);
-            //aa
+
 
             for (OrderProductDetail od : odList) {
                 System.out.println(od);
@@ -46,6 +46,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
             return false;
         }
     }
+
     public List<OrderProductDetail> getAllOrderProductDetails() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM orderProductDetails");
         List<OrderProductDetail> orderProductDetails = new ArrayList<>();
