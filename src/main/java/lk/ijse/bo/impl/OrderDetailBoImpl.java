@@ -23,7 +23,7 @@ public class OrderDetailBoImpl implements OrderDetailBO {
 
     OrderDetailDAO orderDetailDAO = (OrderDetailDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAIL);
 
-    public boolean saveOrderProductDetail(List<OrderProductDetail> odList) {
+    public boolean saveOrderProductDetail(List<OrderProductDetail> odList) throws ClassNotFoundException {
         return orderDetailDAO.saveOrderProductDetail(odList);
     }
     public List<OrderProductDetailDTO> getAllOrderProductDetails() throws SQLException, ClassNotFoundException {

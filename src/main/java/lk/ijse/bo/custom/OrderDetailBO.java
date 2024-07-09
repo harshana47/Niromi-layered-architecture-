@@ -17,7 +17,7 @@ import java.util.List;
 
 public interface OrderDetailBO extends SuperBO {
 
-    public boolean saveOrderProductDetail(List<OrderProductDetail> odList);
+    public boolean saveOrderProductDetail(List<OrderProductDetail> odList) throws ClassNotFoundException;
 
     public List<OrderProductDetailDTO> getAllOrderProductDetails() throws SQLException, ClassNotFoundException;
 }

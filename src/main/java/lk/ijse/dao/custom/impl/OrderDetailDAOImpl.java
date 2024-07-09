@@ -14,27 +14,12 @@ import java.util.List;
 
 public class OrderDetailDAOImpl implements OrderDetailDAO {
 
-    public boolean saveOrderProductDetail(List<OrderProductDetail> odList) {
+    public boolean saveOrderProductDetail(List<OrderProductDetail> odList) throws ClassNotFoundException {
         System.out.println("Saving order product detail information");
-        Connection connection = null;
-        PreparedStatement pst = null;
-
         try {
-            connection = DbConnection.getInstance().getConnection();
-            String sql = "INSERT INTO orderProductDetails (orderId, productId, quantity, itemPrice, date) VALUES (?,?,?,?,?)";
-            pst = connection.prepareStatement(sql);
-
-
             for (OrderProductDetail od : odList) {
-                System.out.println(od);
-                pst.setString(1, od.getOrderId());
-                pst.setString(2, od.getProductId());
-                pst.setInt(3, od.getQty());
-                pst.setDouble(4, od.getTotal());
-                pst.setObject(5, od.getOrderDate());
-
-                boolean isSaved = pst.executeUpdate() > 0;
-                if (!isSaved) {
+                boolean Saved = SQLUtil.execute("INSERT INTO orderProductDetails (orderId, productId, quantity, itemPrice, date) VALUES (?,?,?,?,?)",od.getOrderId(),od.getProductId(),od.getQty(),od.getTotal(),od.getOrderDate());
+                if (!Saved) {
                     return false;
                 }
             }
