@@ -6,6 +6,7 @@ import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.entity.User;
 import lk.ijse.entity.User;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -38,7 +39,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByPhone(String phone) throws SQLException, ClassNotFoundException {
-       return SQLUtil.execute("SELECT * FROM User WHERE phone =?",phone);
+       ResultSet resultSet = SQLUtil.execute("SELECT * FROM User WHERE phone =?",phone);
+        if (resultSet.next()){
+            return new User(
+                    resultSet.getString("userId")
+            );
+        }
+        return null;
     }
 
     @Override

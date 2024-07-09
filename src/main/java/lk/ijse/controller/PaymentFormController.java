@@ -77,7 +77,7 @@ public class PaymentFormController {
         PaymentDTO selectedPaymentDTO = tblPayment.getSelectionModel().getSelectedItem();
 
         if (selectedPaymentDTO != null) {
-            paymentBO.delete(String.valueOf(selectedPaymentDTO));
+            paymentBO.delete(selectedPaymentDTO.getPaymentId());
             loadPaymentDataIntoTable();
         }
     }

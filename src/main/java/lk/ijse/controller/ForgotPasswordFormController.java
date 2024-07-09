@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import lk.ijse.bo.BOFactory;
 import lk.ijse.bo.custom.UserBO;
 import lk.ijse.bo.impl.UserBoImpl;
+import lk.ijse.entity.User;
 import lk.ijse.model.UserDTO;
 import lk.ijse.dao.custom.impl.UserDAOImpl;
 
@@ -30,9 +31,9 @@ public class ForgotPasswordFormController {
     public void btnVerifyOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String phone = txtPhone.getText();
         if (phone != null) {
-            String user = String.valueOf(userBO.findByPhone(phone));
+            UserDTO user = userBO.findByPhone(phone);
             if (user != null) {
-                txtUserId.setText(user);
+                txtUserId.setText(user.getUserId());
             }else {
                 new Alert(Alert.AlertType.ERROR, "User not found!").show();
             }

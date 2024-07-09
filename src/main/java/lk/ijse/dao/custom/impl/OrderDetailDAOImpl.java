@@ -27,7 +27,6 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
             return true;
         } catch (SQLException e) {
             new Alert(Alert.AlertType.CONFIRMATION, e.getMessage()).show();
-
             return false;
         }
     }

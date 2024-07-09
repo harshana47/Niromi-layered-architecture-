@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UserBoImpl implements UserBO {
 
-    UserDAO userDAO = (UserDAO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+    UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.USER);
 
     public List<UserDTO> getAllUsers() throws SQLException, ClassNotFoundException {
         List<User> users = userDAO.getAllUsers();

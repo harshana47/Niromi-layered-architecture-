@@ -11,4 +11,5 @@ public interface UserDAO extends CrudDAO<User> {
 
     public List<User> getAllUsers() throws SQLException, ClassNotFoundException;
 
+
 }
