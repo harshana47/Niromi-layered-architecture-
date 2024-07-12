@@ -14,6 +14,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.UserBO;
 import lk.ijse.db.DbConnection;
 
 import java.io.IOException;
@@ -38,6 +40,8 @@ public class LoginFormController implements Initializable {
     @FXML
     private TextField txtUserName;
 
+    UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         String mediaFileUrl = "file:///C:/Users/Harshana/Downloads/LARS-SKINCARE-VIDEO.mp4";
@@ -47,21 +51,21 @@ public class LoginFormController implements Initializable {
         mediaPlayer.setAutoPlay(true);
     }
 
-
     @FXML
-    void btnLoginOnAction(ActionEvent event) {
+    void btnLoginOnAction(ActionEvent event) throws ClassNotFoundException {
         String userId = txtUserName.getText();
         String password = txtPassword.getText();
 
         try {
-            if (checkCredential(userId, password)) {
+            boolean done = true;
+            done = userBO.checkCredential(userId, password);
+            if (done) {
                 navigateToTheDashboard();
             }
         } catch (SQLException | IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     private boolean checkCredential(String userId, String password) throws SQLException, IOException {
         String sql = "SELECT password FROM user WHERE userId = ?";
@@ -79,7 +83,6 @@ public class LoginFormController implements Initializable {
             } else {
                 new Alert(Alert.AlertType.ERROR, "Sorry! Password is incorrect!").show();
             }
-
         } else {
             new Alert(Alert.AlertType.INFORMATION, "Sorry! User ID not found!").show();
         }

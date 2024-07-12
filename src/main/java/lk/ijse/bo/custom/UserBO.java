@@ -6,6 +6,7 @@ import lk.ijse.dao.CrudDAO;
 import lk.ijse.dao.SQLUtil;
 import lk.ijse.model.UserDTO;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface UserBO extends SuperBO {
     public void load(ObservableList<UserDTO> DTOList) throws SQLException, ClassNotFoundException;
 
     public UserDTO search(String id) throws SQLException, ClassNotFoundException;
+
+    public boolean checkCredential(String userId, String password) throws SQLException, IOException, ClassNotFoundException;
 }

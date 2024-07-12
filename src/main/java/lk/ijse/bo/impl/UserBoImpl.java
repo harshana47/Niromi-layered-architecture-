@@ -10,6 +10,7 @@ import lk.ijse.dao.custom.impl.UserDAOImpl;
 import lk.ijse.entity.User;
 import lk.ijse.model.UserDTO;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,9 @@ public class UserBoImpl implements UserBO {
     @Override
     public UserDTO search(String id) throws SQLException, ClassNotFoundException {
         return null;
+    }
+
+    public boolean checkCredential(String userId, String password) throws SQLException, IOException, ClassNotFoundException {
+        return userDAO.checkCredential(userId, password);
     }
 }
